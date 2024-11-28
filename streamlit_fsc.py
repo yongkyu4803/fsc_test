@@ -46,12 +46,15 @@ if st.button("데이터 가져오기"):
             st.error(notice_data)
         else:
             for notice in notice_data:
-                with st.container():  # 컨테이너로 각 공지사항 구분
-                    st.markdown(f"### {notice['subject']}")
-                    st.write(f"**링크:** [바로가기]({notice['link']})")
-                    st.write("**정보:**")
-                    st.json(notice['info'])
-                    st.write(f"**날짜:** {notice['date']}")
-                    st.divider()
+                with st.container():  # Separate each notice into a container
+                        st.markdown(f"### {notice['subject']}")
+                        st.markdown(f"**링크:** [바로가기]({notice['link']})")
+                        
+                        st.markdown("#### 정보:")
+                        for key, value in notice['info'].items():
+                            st.markdown(f"- **{key}**: {value}")
+                        
+                        st.markdown(f"**날짜:** {notice['date']}")
+                        st.markdown("---")
     except Exception as e:
         st.error(f"오류 발생: {e}")
